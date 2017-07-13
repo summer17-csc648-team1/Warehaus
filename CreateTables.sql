@@ -20,7 +20,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Media` (
-  `MediaID` INT(11) NOT NULL,
+  `MediaID` INT(11) NOT NULL AUTO_INCREMENT,
   `File_Location` VARCHAR(45) NULL DEFAULT NULL,
   `Media_Type` VARCHAR(45) NULL DEFAULT NULL,
   `Date_Uploaded` DATETIME NULL DEFAULT NULL,
@@ -29,8 +29,14 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Media` (
   `Thumbnail_Location` VARCHAR(45) NULL DEFAULT NULL,
   `Title` VARCHAR(45) NULL DEFAULT NULL,
   `User_Username` VARCHAR(50) NOT NULL,
+  `Category_CategoryID` NOT NULL,
   PRIMARY KEY (`MediaID`, `User_Username`),
   INDEX `fk_Media_User1_idx` (`User_Username` ASC),
+  CONSTRAINT `fk_Categories_CategoryID`
+    FOREIGN KEY (`Categories_CategoryID`)
+    REFERENCES `mydb`.`Category` (`CategoryID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Media_User1`
     FOREIGN KEY (`User_Username`)
     REFERENCES `mydb`.`User` (`Username`)
@@ -98,14 +104,9 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Categories` (
+  `CategoryID` INT(11) NOT NULL AUTO_INCREMENT,
   `Category` VARCHAR(50) NULL DEFAULT NULL,
-  `Media_MediaID` INT(11) NOT NULL,
-  PRIMARY KEY (`Media_MediaID`),
-  CONSTRAINT `fk_Categories_Media1`
-    FOREIGN KEY (`Media_MediaID`)
-    REFERENCES `mydb`.`Media` (`MediaID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`CategoryID`)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
