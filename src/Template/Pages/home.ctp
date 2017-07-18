@@ -56,6 +56,8 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     </div>
     <div class="row" id="append">
     </div>
+    <div class="row" id="image">
+    </div>
 </div>
 <script>
 
@@ -89,12 +91,17 @@ $(document).ready(function(event){
                     html += "<tr>";
                     $.each(obj,function(key, value) //this loops the attributes of the object
                     {
+                        if(key == 'File_Location') {
+                            var link = value.replace("/webroot","");
+                            $('#image').prepend($('<img>',{id:'theImg',src:link}))
+                        }
                         html += '<td>' + value + '</td>';
                     });
                     html += "</tr>";
                 });
                 html += "</table>";
                 $("#append").append(html);
+                
                 
             },
             error: function(xhr,textStatus,error){ 
