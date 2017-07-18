@@ -69,6 +69,7 @@ $(document).ready(function(event){
         
         var value = $('#name').serialize();
         $("#append").empty();
+        $('#image').empty()
         $.ajax({
             type:"POST",
             url: "/Query/search",
