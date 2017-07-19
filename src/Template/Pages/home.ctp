@@ -22,9 +22,7 @@ use Cake\Routing\Router;
 
 $this->layout = false;
 
-if (!Configure::read('debug')):
-    throw new NotFoundException('Please replace src/Template/Pages/home.ctp with your own version.');
-endif;
+
 
 $cakeDescription = 'CakePHP: the rapid development PHP framework';
 ?>
@@ -36,8 +34,13 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <title>
         <?= $cakeDescription ?>
     </title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
@@ -59,6 +62,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <div class="row" id="image">
     </div>
 </div>
+
 <script>
 
     
@@ -72,13 +76,16 @@ $(document).ready(function(event){
         $('#image').empty()
         $.ajax({
             type:"POST",
-            url: "/Query/search",
+            url: "http://sfsuse.com/~su17g01/Warehaus/query/search",
             data:{
                 name : value
             },
             success: function(data){
+		
                 var html = "<table>";
+		
                 var objs = JSON.parse(data);
+		
                 for(var i = 0; i < 1; i++) {
                     html += "<tr>";
                     $.each(objs[0],function(key, value) //this loops the attributes of the object
@@ -93,7 +100,7 @@ $(document).ready(function(event){
                     $.each(obj,function(key, value) //this loops the attributes of the object
                     {
                         if(key == 'File_Location') {
-                            var link = value.replace("/webroot","");
+                            var link = window.location.href.match(/^.*\//) +  value.replace("/webroot/","");
                             $('#image').prepend($('<img>',{id:'theImg',src:link}))
                         }
                         html += '<td>' + value + '</td>';
