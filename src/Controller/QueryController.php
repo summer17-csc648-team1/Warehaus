@@ -54,7 +54,7 @@ class QueryController extends Controller
             }
             $results = $connection
                 ->execute('SELECT * FROM Media, Categories 
-                            WHERE Categories_CategoryID=CategoryID AND Category=', $category,';')
+                            WHERE Categories_CategoryID=CategoryID AND Category=\'', $category,'\';')
                 ->fetchAll('assoc');
         }
     }
@@ -78,7 +78,7 @@ class QueryController extends Controller
                 $this->log($error->getMessage(), 'debug');
             }
             $results = $connection
-                ->execute('SELECT * FROM User WHERE Username=', $username, ' AND Password=', $password, ';')
+                ->execute('SELECT * FROM User WHERE Username=\'', $username, '\' AND Password=\'', $password, '\';')
                 ->fetchAll('assoc');
 
             foreach ($results as $row)
