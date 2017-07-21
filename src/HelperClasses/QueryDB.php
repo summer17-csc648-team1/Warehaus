@@ -110,7 +110,6 @@ class QueryDB
         $Categories = $this->connection
             ->execute('SELECT * FROM Categories WHERE Category = \'' . $Category . '\';' )
             ->fetchAll('assoc');
-        Log::debug($Categories);
         if(empty($Categories)) {
             $result = $this->connection
                 ->execute('INSERT INTO Categories (Category)
