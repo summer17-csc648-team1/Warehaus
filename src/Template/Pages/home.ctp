@@ -27,27 +27,126 @@ endif;
 
 $cakeDescription = 'CakePHP: the rapid development PHP framework';
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>
-    </title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <?= $this->Html->meta('icon') ?>
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
-    <?= $this->Html->css('home.css') ?>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:500i|Roboto:300,400,700|Roboto+Mono" rel="stylesheet">
-</head>
-<body class="home">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-    <form action="home.php" method="post">
-    Search Text: <input type="text" name="name"><br>
-    <input type="submit" value="Search">
-    </form>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-</body>
+        <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+        }
+
+        li a {
+            float: right;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            color: white;
+            background-color: black;
+        }
+
+        .logo {
+            float: left;
+            position: relative;
+            margin: 0;
+            padding: 0;
+           diaplay: block;
+            color: white;
+            background-color: red;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .active {
+            color: white;
+            background-color: red;
+        }
+
+        </style>
+
+
+        <link rel="stylesheet" type="text/css" href="site.css">
+    </head>
+    <body>
+    <ul>
+
+            <li><a class="logo" href="home.ctp">WAREHAUS</a></li>
+
+
+            <li><a href="register.ctp">REGISTER</a></li>
+            <li><a href="login.ctp">LOGIN</a></li>
+            <li><a href="upload.ctp">UPLOAD</a></li>
+            <li><a href="contact.ctp">CONTACT</a></li>
+            <li><a href="about.ctp">ABOUT US</a></li>
+
+    </ul>
+
+        <div class="container-full">
+
+      <div class="row">
+
+        <div class="col-lg-12 text-center v-center">
+
+
+
+          <form class="col-lg-12">
+
+
+    <div class="container">
+
+    <div class="text-center">
+        <h1>SW Project Team One</h1>
+        <p class="lead">This is homepage. *for demonstration only*</p>
+    </div>
+        <div class="row">
+            <div class="col-md-12" style="padding-top:20px;">
+
+            </div>
+            <form method="post" accept-charset="utf-8" action="">
+            <select name="genre" class="inlineDrop" id="genre" style="float: left"><option value="">GENRE</option><option value="1">Food</option><option value="2">Architecture</option><option value="3">City</option><option value="4">Pets</option></select>
+            <button class="icon" style="float: right"><i class="glyphicon glyphicon-search"></i></button>
+<!--            <input type="submit"value="Search" style="float: right" />-->
+            <div style="overflow: hidden; padding-right: .5em;">
+                <input type="text" style="width: 100%;" />
+            </div>​</form>
+                <input type="checkbox" name="photo" value="photo">photos
+                <input type="checkbox" name="video" value="video">videos
+                <input type="checkbox" name="all" value="all">all
+
+        </div>
+        <div class="row" id="append"></div>
+        <div class="row" id="image"></div>
+
+
+
+	<div class="row">
+        <div class="col-lg-12">
+        <br><br>
+          <p class="pull-right"><a href="http://www.bootply.com">Template from Bootply</a> &nbsp; ©Copyright 2013 ACME<sup>TM</sup> Brand.</p>
+        <br><br>
+        </div>
+    </div>
+    </div>
+    </body>
 </html>
