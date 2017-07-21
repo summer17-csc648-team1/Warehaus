@@ -26,19 +26,14 @@ if (!Configure::read('debug')):
 endif;
 
 $cakeDescription = 'CakePHP: the rapid development PHP framework';
+
+$this->html->css('bootstrap.css');
+$this->html->script('jquery-3.2.1.min.js');
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
         <style>
         ul {
             list-style-type: none;
@@ -125,8 +120,8 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
             </div>
             <form method="post" accept-charset="utf-8" action="">
             <select name="genre" class="inlineDrop" id="genre" style="float: left"><option value="">GENRE</option><option value="1">Food</option><option value="2">Architecture</option><option value="3">City</option><option value="4">Pets</option></select>
-            <button class="icon" style="float: right"><i class="glyphicon glyphicon-search"></i></button>
-<!--            <input type="submit"value="Search" style="float: right" />-->
+<!--            <button class="icon" style="float: right"><i class="glyphicon glyphicon-search"></i></button>-->
+            <input type="submit"value="Search" style="float: right" />
             <div style="overflow: hidden; padding-right: .5em;">
                 <input type="text" style="width: 100%;" />
             </div>​</form>
@@ -135,18 +130,6 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                 <input type="checkbox" name="all" value="all">all
 
         </div>
-        <div class="row" id="append"></div>
-        <div class="row" id="image"></div>
-
-
-
-	<div class="row">
-        <div class="col-lg-12">
-        <br><br>
-          <p class="pull-right"><a href="http://www.bootply.com">Template from Bootply</a> &nbsp; ©Copyright 2013 ACME<sup>TM</sup> Brand.</p>
-        <br><br>
-        </div>
-    </div>
     </div>
     </body>
 </html>

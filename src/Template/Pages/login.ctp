@@ -26,19 +26,14 @@ if (!Configure::read('debug')):
 endif;
 
 $cakeDescription = 'CakePHP: the rapid development PHP framework';
+
+$this->html->css('bootstrap.css');
+$this->html->script('jquery-3.2.1.min.js');
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <style>
         ul {
             list-style-type: none;
@@ -90,15 +85,11 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 
     </style>
 
-
-    <link rel="stylesheet" type="text/css" href="site.css">
 </head>
 <body>
 <ul>
 
     <li><a class="logo" href="home.ctp">WAREHAUS</a></li>
-
-
     <li><a href="register.ctp">REGISTER</a></li>
     <li><a class="active" href="login.ctp">LOGIN</a></li>
     <li><a href="upload.ctp">UPLOAD</a></li>
@@ -131,20 +122,6 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                         </form>
 
 
-                    </div>
-
-
-                    <div class="row" id="append"></div>
-                    <div class="row" id="image"></div>
-
-
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <br><br>
-                            <p class="pull-right"><a href="http://www.bootply.com">Template from Bootply</a> &nbsp; ©Copyright 2013 ACME<sup>TM</sup> Brand.</p>
-                            <br><br>
-                        </div>
                     </div>
                 </div>
 </body>
