@@ -47,7 +47,7 @@ class QueryDB
             $this->connection = ConnectionManager::get($ConnectionName);
         }
         catch (Exception $error) {
-            $this->log($error->getMessage(), 'debug');
+            $this->log('Could not connect to database ' . $ConnectionName . ' with error: ' . $error->getMessage(), 'debug');
         }
     }
     function SearchMediaByTitle($title)
@@ -96,43 +96,79 @@ class QueryDB
 
         return $JSONResponse;
     }
+    function GetCategories()
+    {
+        $results = $this->connection
+            ->execute('SELECT Category FROM Categories')
+            ->fetchAll('assoc');
+        return json_encode($results);
+    }
     function InsertMedia($Attributes)
     {
-        $result = $this->connection
-            ->execute('INSERT INTO Media (Title,FileLocation,ThumbnailLocation,MediaType,Format,DateUploaded,Price,Categories_Category_ID,User_UserID)
-                        VALUES (\'' . $Attributes['Title'] . '\',\'' . $Attributes['FileLocation'] . '\',\'' . $Attributes['MediaType'] .
-                        '\',\'' . $Attributes['Format'] . '\',\'' . $Attributes['DateUploaded'] . '\',\'' . $Attributes['Price'] .
-                        '\',\'' . $Attributes['Categories_Category_ID'] . '\',\'' . $Attributes['User_UserID'] . '\');');
-        return true;
+        $result = $this->connection->insert('Media',
+            [
+                'Title' => $Attributes['Title'],
+                'FileLocation' => $Attributes['FileLocation'],
+                'ThumbnailLocation' => $Attributes['ThumbnailLocation'],
+                'MediaType' => $Attributes['MediaType'],
+                'Format' => $Attributes['Format'],
+                'DateUploaded' => $Attributes['DateUploaded'],
+                'Price' => $Attributes['Price'],
+                'Categories_Category_ID' => $Attributes['Categories_Category_ID'],
+                'User_UserID' => $Attributes['User_UserID']
+            ]);
+        if ($result->errorInfo()[0] = 0000) {
+            return true;
+        } else {
+            return false;
+        }
     }
     function InsertCategory($Category)
     {
         $Categories = $this->connection
             ->execute('SELECT * FROM Categories WHERE Category = \'' . $Category . '\';' )
             ->fetchAll('assoc');
-        Log::debug($Categories);
         if(empty($Categories)) {
-            $result = $this->connection
-                ->execute('INSERT INTO Categories (Category)
-                        VALUES (\'' . $Category . '\');');
-            return true;
+            $result = $this->connection->insert('Categories',
+                [
+                    'Category' => $Category
+                ]
+            );
+            if ($result->errorInfo()[0] = 0000) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        return false;
     }
     function InsertMessages($Attributes)
     {
-        $result = $this->connection
-            ->execute('INSERT INTO Messages (User1,User2,Message,Date)
-                        VALUES (\'' . $Attributes['User1'] . '\',\'' . $Attributes['User2'] . '\',\'' . $Attributes['Message'] .
-                        '\',\'' . $Attributes['Date'] . '\');');
-        return true;
+        $result = $this->connection->insert('Messages',
+            [
+                'User1' => $Attributes['User1'],
+                'User2' => $Attributes['User2'],
+                'Message' => $Attributes['Message'],
+                'Date' => $Attributes['Date']
+            ]);
+        if ($result->errorInfo()[0] = 0000) {
+            return true;
+        } else {
+            return false;
+        }
     }
     function InsertTransactions($Attributes)
     {
-        $result = $this->connection
-            ->execute('INSERT INTO Transactions (OrderDate,SoldBy,PurchasedBy)
-                        VALUES (\'' . $Attributes['OrderDate'] . '\',\'' . $Attributes['Soldby'] . '\',\'' . $Attributes['PurchaseBy'] .
-                        '\');');
-        return true;
+
+        $result = $this->connection->insert('Transactions',
+            [
+                'OrderDate' => $Attributes['OrderDate'],
+                'SoldBy' => $Attributes['SoldBy'],
+                'PurchasedBy' => $Attributes['PurchasedBy'],
+            ]);
+        if ($result->errorInfo()[0] = 0000) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
