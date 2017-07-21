@@ -7,7 +7,18 @@ use Cake\Validation\Validator;
 
 class UserTable extends Table
 {
+    public function beforeSave(Event $event)
+    {
+        $entity = $event->getData('entity');
 
+        // Make a password for digest auth.
+        $entity->digest_hash = DigestAuthenticate::password(
+            $entity->username,
+            $entity->plain_password,
+            env('SERVER_NAME')
+        );
+        return true;
+    }
     public function validationDefault(Validator $validator)
     {
         return $validator
