@@ -81,7 +81,6 @@ $this->html->script('jquery-3.2.1.min.js');
         </style>
 
 
-        <link rel="stylesheet" type="text/css" href="site.css">
     </head>
     <body>
     <ul>
@@ -99,17 +98,6 @@ $this->html->script('jquery-3.2.1.min.js');
 
         <div class="container-full">
 
-      <div class="row">
-
-        <div class="col-lg-12 text-center v-center">
-
-
-
-          <form class="col-lg-12">
-
-
-    <div class="container">
-
     <div class="text-center">
         <h1>SW Project Team One</h1>
         <p class="lead">This is homepage. *for demonstration only*</p>
@@ -125,10 +113,9 @@ $this->html->script('jquery-3.2.1.min.js');
             <div style="overflow: hidden; padding-right: .5em;">
                 <input type="text" style="width: 100%;" />
             </div>​</form>
-                <input type="checkbox" name="photo" value="photo">photos
-                <input type="checkbox" name="video" value="video">videos
-                <input type="checkbox" name="all" value="all">all
-
+                <input type="radio" name="group1" value="photo">photos
+                <input type="radio" name="group1" value="video">videos
+                <input type="radio" name="group1" value="all" checked>all
         </div>
     </div>
     </body>

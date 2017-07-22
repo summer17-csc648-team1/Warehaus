@@ -102,10 +102,6 @@ $this->html->script('jquery-3.2.1.min.js');
 
     <div class="row">
 
-
-
-
-
             <form class="col-lg-12">
 
 
@@ -120,8 +116,6 @@ $this->html->script('jquery-3.2.1.min.js');
                             <label></label><input type='submit' value='Login' />
                             </div>
                         </form>
-
-
                     </div>
                 </div>
 </body>
