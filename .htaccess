@@ -1,0 +1,10 @@
+RewriteEngine on
+RewriteBase /
+
+# this RewriteCond is needed to avoid rewrite loops
+RewriteCond %{REQUEST_URI} !^/ClassWarehaus/webroot/
+RewriteRule (.*) app/webroot/$1 [L,R]
+
+RewriteCond %{HTTP_REFERER} !localhost
+RewriteCond %{REQUEST_URI} ^/ClassWarehaus/webroot/Images/
+RewriteRule .* - [L,F]
