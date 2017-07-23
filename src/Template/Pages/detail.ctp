@@ -144,18 +144,18 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         <div style="float: left; margin-left: 10%;">
             <table>
                 <tr>
-                    <h1>Bloodborne_FinalEnemy</h1>
+                    <h1 id="title">Test Image</h1>
                 </tr>
                 <tr>
-                    <p> <b>Category: </b> <?php echo "Games";?></p>
+                    <p id="category"> <b>Category: </b> <?php echo "Games";?></p>
                 </tr>
                 <tr>
-                    <p><b>Price: </b> <?php echo "$1.00"; ?></p>
+                    <p id="price"><b>Price: </b> <?php echo "$1.00"; ?></p>
                 </tr>
                 <tr>
-                    <p><b>Owner: </b> <?php echo "AUserName"?></p>
+                    <p id="owner"><b>Owner: </b> <?php echo "AUserName"?></p>
                     <a target="_blank" href="https://www.google.com"><button >Contact Owner</button></a>
-                    <a target="_blank" href="https://www.google.com"><button >Buy it now</button></a>
+                    <!--<a target="_blank" href="https://www.google.com"><button >Buy it now</button></a>-->
                 </tr>
             </table>
 
@@ -164,7 +164,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <div style="clear: both;">
         <hr>
         <h3>Description</h3>
-        <p><?php echo "Here is the description of the picture provided by the seller." ?></p>
+        <p id="description"><?php echo "Here is the description of the picture provided by the seller." ?></p>
     </div>
 </div>
 
