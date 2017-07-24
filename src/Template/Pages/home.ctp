@@ -19,14 +19,6 @@ use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
 
-$this->layout = false;
-
-if (!Configure::read('debug')):
-    throw new NotFoundException('Please replace src/Template/Pages/home.ctp with your own version.');
-endif;
-
-$cakeDescription = 'CakePHP: the rapid development PHP framework';
-
 $this->html->css('bootstrap.css');
 $this->html->script('jquery-3.2.1.min.js');
 ?>
@@ -84,38 +76,27 @@ $this->html->script('jquery-3.2.1.min.js');
     </head>
     <body>
     <ul>
-
-            <li><a class="logo" href="home.ctp">WAREHAUS</a></li>
-
-
-            <li><a href="register.ctp">REGISTER</a></li>
-            <li><a href="login.ctp">LOGIN</a></li>
-            <li><a href="upload.ctp">UPLOAD</a></li>
-            <li><a href="contact.ctp">CONTACT</a></li>
-            <li><a href="about.ctp">ABOUT US</a></li>
-
+            <li><a class="logo" href="/pages/home">WAREHAUS</a></li>
+            <li><a href="/pages/register">REGISTER</a></li>
+            <li><a href="/pages/login">LOGIN</a></li>
+            <li><a href="/pages/upload">UPLOAD</a></li>
+            <li><a href="/pages/contact">CONTACT</a></li>
+            <li><a href="/pages/about">ABOUT US</a></li>
     </ul>
-
-        <div class="container-full">
 
     <div class="text-center">
         <h1>SW Project Team One</h1>
         <p class="lead">This is homepage. *for demonstration only*</p>
     </div>
-        <div class="row">
-            <div class="col-md-12" style="padding-top:20px;">
-
-            </div>
-            <form method="post" accept-charset="utf-8" action="">
-            <select name="genre" class="inlineDrop" id="genre" style="float: left"><option value="">GENRE</option><option value="1">Food</option><option value="2">Architecture</option><option value="3">City</option><option value="4">Pets</option></select>
+            <select name="category" id="category" style="float: left"><option value="">CATEGORY</option><option value="1">Food</option><option value="2">Architecture</option><option value="3">City</option><option value="4">Pets</option></select>
             <input type="submit"value="Search" style="float: right" />
             <div style="overflow: hidden; padding-right: .5em;">
                 <input type="text" style="width: 100%;" />
-            </div>​</form>
+            </div>
                 <input type="radio" name="group1" value="photo">photos
                 <input type="radio" name="group1" value="video">videos
                 <input type="radio" name="group1" value="all" checked>all
-        </div>
-    </div>
+    <br>
+
     </body>
 </html>
