@@ -81,7 +81,23 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         <link rel="stylesheet" type="text/css" href="site.css">
     </head>
 
-    <body class="detail">    
+    <body class="detail">
+        <?php
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+
+            // Create connection
+            $conn = new mysqli($servername, $username, $password);
+
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            } 
+            echo "Connected successfully";
+        ?>
+        
+        
         <ul>
             <li><a class="logo" href="home.ctp">WAREHAUS</a></li>
             <li><a href="register.ctp">REGISTER</a></li>
@@ -92,81 +108,52 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         </ul>
 
 
-        <div style="margin-left: 30%; margin-top: 10%">
+        <div style="margin-left: 30%; margin-top: 10%">           
+            
+            <?php
+                // define variables and set to empty values
+                $user1 = $user2 = $comment = "";
+                $date =  date('m/d/Y'); //$date for storing into db
 
-            <h2>
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {             
+                    if (empty($_POST["comment"])) {
+                         $comment = "";
+                    } else {
+                        $comment = test_input($_POST["comment"]);                  
+                    }
+                }
+                
+                function test_input($data) {
+                    $data = trim($data);
+                    $data = stripslashes($data);
+                    $data = htmlspecialchars($data);
+                    return $data;
+                }               
+            ?>
 
-                To:  &nbsp;&nbsp;&nbsp;&nbsp; <?php echo "John";?>
-            </h2>
-            <h2>Message*:</h2>
+            <h2>To:  &nbsp;&nbsp;&nbsp; <?php echo "John";?></h2>  <!--Data of "John" need to get from DB-->
 
-            <!--Need variable to store message-->
-            <!--This will be convert to php--> 
-
-            <textarea rows="15" cols="50">
-            </textarea><br>
-            <input type="submit" value="Send"/>        
-        </div>
-
-        
-        
-               
-
-
-    <div class="container">
-
-    <div class="text-center">
-        <h1>SW Project Team One</h1>
-        <p class="lead">This is homepage. *for demonstration only*</p>
-    </div>
-        <div class="row">
-            <div class="col-md-12" style="padding-top:20px;">
-
-            </div>
-            <form method="post" accept-charset="utf-8" action="">
-            <select name="genre" class="inlineDrop" id="genre" style="float: left"><option value="">GENRE</option><option value="1">Food</option><option value="2">Architecture</option><option value="3">City</option><option value="4">Pets</option></select>
-<!--            <button class="icon" style="float: right"><i class="glyphicon glyphicon-search"></i></button>-->
-            <input type="submit"value="Search" style="float: right" />
-            <div style="overflow: hidden; padding-right: .5em;">
-                <input type="text" style="width: 100%;" />
-            </div>â€‹
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+                <h2>Message*:</h2>
+                <textarea name="comment" rows="15" cols="40"></textarea>
+                <br><br> 
             </form>
-                <input type="checkbox" name="photo" value="photo">photos
-                <input type="checkbox" name="video" value="video">videos
-                <input type="checkbox" name="all" value="all">all
-
-        </div>
-    </div>
-
-
-        
-        
-        
-        
-        
-<!--        <div id="textAreaDiv" style="visibility:hidden;">
-            <textarea rows="15" cols = "50>
-                <br>
-                <input type="submit" value="Send"/>    
-            </textarea></div>
-
-        <input type="button" onClick="showTextArea()">
-        <input type="button" onClick="hideTextArea()">
-
-        <script>
-            function showTextArea() {
-                document.getElementById('textAreaDiv').style.visibility = "visible";
-            }
-
-            function hideTextArea() {
-                document.getElementById('textAreaDiv').style.visibility = "hidden";
-            }
-        </script>-->
-    
-
-         
-
-
+            
+            <form method="POST" action=''>
+                <input type="submit" name="submit"  value="Submit">
+            </form>
+            
+            <?php
+                if (isset($_POST['submit'])) 
+                { 
+                    header("Location: http://localhost:8765/pages/detail");
+                    exit;
+                   //add function here to store values into DB  
+                }
+            ?>  
+            
+            
+        </div>          
     </body>
 </html>
 
