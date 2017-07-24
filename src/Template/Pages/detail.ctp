@@ -21,11 +21,6 @@ use Cake\Network\Exception\NotFoundException;
 use Cake\Routing\Router;
 
 $this->layout = false;
-
-
-
-$cakeDescription = 'CakePHP: the rapid development PHP framework';
-
 ?>
 
 <!DOCTYPE html>
@@ -58,14 +53,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         }
 
         img {
-
             width:600px;
-            /*height:320px;*/
-            /*
-            margin-top:50px;
-            margin-left:50px;
-            */
-
         }
 
         h3 {
@@ -81,17 +69,11 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 
 
         table {
-            /*            border-collapse: collapse;
-                        margin-left: 600px;*/
             margin:0;
             padding:0;
         }
 
         th, td {
-            /*
-                        padding: 15px;
-                        text-align: left;
-                        border-bottom: 1px solid #ddd;*/
             margin:0;
             padding:0;
         }
@@ -154,8 +136,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                 </tr>
                 <tr>
                     <p id="owner"><b>Owner: </b> <?php echo "AUserName"?></p>
-                    <a target="_blank" href="https://www.google.com"><button >Contact Owner</button></a>
-                    <!--<a target="_blank" href="https://www.google.com"><button >Buy it now</button></a>-->
+                    <a href="#"><button >Contact Owner</button></a>
                 </tr>
             </table>
 
