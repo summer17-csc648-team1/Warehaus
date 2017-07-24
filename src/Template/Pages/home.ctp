@@ -108,7 +108,6 @@ $this->html->script('jquery-3.2.1.min.js');
             </div>
             <form method="post" accept-charset="utf-8" action="">
             <select name="genre" class="inlineDrop" id="genre" style="float: left"><option value="">GENRE</option><option value="1">Food</option><option value="2">Architecture</option><option value="3">City</option><option value="4">Pets</option></select>
-<!--            <button class="icon" style="float: right"><i class="glyphicon glyphicon-search"></i></button>-->
             <input type="submit"value="Search" style="float: right" />
             <div style="overflow: hidden; padding-right: .5em;">
                 <input type="text" style="width: 100%;" />
