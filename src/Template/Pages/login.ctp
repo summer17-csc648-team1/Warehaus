@@ -19,14 +19,6 @@ use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
 
-$this->layout = false;
-
-if (!Configure::read('debug')):
-    throw new NotFoundException('Please replace src/Template/Pages/home.ctp with your own version.');
-endif;
-
-$cakeDescription = 'CakePHP: the rapid development PHP framework';
-
 $this->html->css('bootstrap.css');
 $this->html->script('jquery-3.2.1.min.js');
 ?>
@@ -88,35 +80,25 @@ $this->html->script('jquery-3.2.1.min.js');
 </head>
 <body>
 <ul>
-
-    <li><a class="logo" href="home.ctp">WAREHAUS</a></li>
-    <li><a href="register.ctp">REGISTER</a></li>
-    <li><a class="active" href="login.ctp">LOGIN</a></li>
-    <li><a href="upload.ctp">UPLOAD</a></li>
-    <li><a href="contact.ctp">CONTACT</a></li>
-    <li><a href="about.ctp">ABOUT US</a></li>
-
+    <li><a class="logo" href="/pages/home">WAREHAUS</a></li>
+    <li><a href="/pages/register">REGISTER</a></li>
+    <li><a class="active" href="/pages/login">LOGIN</a></li>
+    <li><a href="/pages/upload">UPLOAD</a></li>
+    <li><a href="/pages/contact">CONTACT</a></li>
+    <li><a href="/pages/about">ABOUT US</a></li>
 </ul>
 
-<div class="container-full">
-
-    <div class="row">
-
-            <form class="col-lg-12">
-
-
-                <div class="container">
-                    <h1>Login:</h1>
-                    <div>
-
-                        <form action='login.ctp' method='post'>
-                                <label>Username:</label><input type="text" name="username" /><br>
-                                <label>Password:</label><input type="password" name="password" /><br>
-                                <br>
-                            <label></label><input type='submit' value='Login' />
-                            </div>
-                        </form>
-                    </div>
-                </div>
 </body>
 </html>
+
+<div class="users form">
+    <?= $this->Flash->render() ?>
+    <?= $this->Form->create() ?>
+    <fieldset>
+        <legend><?= __('Please enter your username and password') ?></legend>
+        <?= $this->Form->control('username') ?>
+        <?= $this->Form->control('password') ?>
+    </fieldset>
+    <?= $this->Form->button(__('Login')); ?>
+    <?= $this->Form->end() ?>
+</div>
