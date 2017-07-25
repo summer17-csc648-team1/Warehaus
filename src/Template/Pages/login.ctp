@@ -26,7 +26,7 @@ $this->html->script('jquery-3.2.1.min.js');
 <!DOCTYPE html>
 <html>
 <head>
-        <style>
+    <style>
         ul {
             list-style-type: none;
             margin: 0;
@@ -57,7 +57,7 @@ $this->html->script('jquery-3.2.1.min.js');
             position: relative;
             margin: 0;
             padding: 0;
-           diaplay: block;
+            diaplay: block;
             color: white;
             background-color: red;
             text-align: center;
@@ -70,33 +70,35 @@ $this->html->script('jquery-3.2.1.min.js');
             background-color: red;
         }
 
-        </style>
+        label{
+            display:inline-block;
+            width:100px;
+        }
 
+    </style>
 
-    </head>
-    <body>
-    <ul>
-            <li><a class="logo" href="/pages/home">WAREHAUS</a></li>
-            <li><a href="/pages/register">REGISTER</a></li>
-            <li><a href="/pages/login">LOGIN</a></li>
-            <li><a href="/pages/upload">UPLOAD</a></li>
-            <li><a href="/pages/contact">CONTACT</a></li>
-            <li><a href="/pages/about">ABOUT US</a></li>
-    </ul>
+</head>
+<body>
+<ul>
+    <li><a class="logo" href="/pages/home">WAREHAUS</a></li>
+    <li><a href="/pages/register">REGISTER</a></li>
+    <li><a class="active" href="/pages/login">LOGIN</a></li>
+    <li><a href="/pages/upload">UPLOAD</a></li>
+    <li><a href="/pages/contact">CONTACT</a></li>
+    <li><a href="/pages/about">ABOUT US</a></li>
+</ul>
 
-    <div class="text-center">
-        <h1>SW Project Team One</h1>
-        <p class="lead">This is homepage. *for demonstration only*</p>
-    </div>
-            <select name="category" id="category" style="float: left"><option value="">CATEGORY</option><option value="1">Food</option><option value="2">Architecture</option><option value="3">City</option><option value="4">Pets</option></select>
-            <input type="submit"value="Search" style="float: right" />
-            <div style="overflow: hidden; padding-right: .5em;">
-                <input type="text" style="width: 100%;" />
-            </div>
-                <input type="radio" name="group1" value="photo">photos
-                <input type="radio" name="group1" value="video">videos
-                <input type="radio" name="group1" value="all" checked>all
-    <br>
-
-    </body>
+</body>
 </html>
+
+<div class="users form">
+    <?= $this->Flash->render() ?>
+    <?= $this->Form->create() ?>
+    <fieldset>
+        <legend><?= __('Please enter your username and password') ?></legend>
+        <?= $this->Form->control('username') ?>
+        <?= $this->Form->control('password') ?>
+    </fieldset>
+    <?= $this->Form->button(__('Login')); ?>
+    <?= $this->Form->end() ?>
+</div>

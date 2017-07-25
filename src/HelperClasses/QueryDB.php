@@ -47,7 +47,7 @@ class QueryDB
             $this->connection = ConnectionManager::get($ConnectionName);
         }
         catch (Exception $error) {
-            $this->log($error->getMessage(), 'debug');
+            $this->log('Could not connect to database ' . $ConnectionName . ' with error: ' . $error->getMessage(), 'debug');
         }
     }
     function SearchMediaByTitle($title)
@@ -69,11 +69,12 @@ class QueryDB
         $results = $this->connection
             ->execute('SELECT * FROM Media M
                        JOIN Categories C ON C.CategoryID = M.Categories_Category_ID
-                       WHERE Category = ' . '\''. $category . '\';')
+                       WHERE Category LIKE ' . '\'%'. $category . '%\';')
             ->fetchAll('assoc');
 
         foreach ($results as $row)
         {
+            $row["User_UserID"] = $this->GetUsernameByID($row["User_UserID"]);
             array_push($ResultArray, $row);
         }
         $JSONResponse = json_encode($ResultArray);
@@ -96,14 +97,53 @@ class QueryDB
 
         return $JSONResponse;
     }
+    function GetIDByUsername($name)
+    {
+        $results = $this->connection
+            ->execute('SELECT * FROM User
+                       WHERE Username = \'' . $name . '\';')
+            ->fetchAll('assoc');
+
+        $JSONResponse = json_encode($results[0]);
+
+        return $JSONResponse;
+
+    }
+    function GetUsernameByID($ID)
+    {
+        $results = $this->connection
+            ->execute('SELECT * FROM User
+                        WHERE UserID = \'' . $ID . '\';' )
+            ->fetchAll('assoc');
+
+        return $results[0]["Username"];
+    }
+    function GetCategories()
+    {
+        $results = $this->connection
+            ->execute('SELECT Category FROM Categories')
+            ->fetchAll('assoc');
+        return json_encode($results);
+    }
     function InsertMedia($Attributes)
     {
-        $result = $this->connection
-            ->execute('INSERT INTO Media (Title,FileLocation,ThumbnailLocation,MediaType,Format,DateUploaded,Price,Categories_Category_ID,User_UserID)
-                        VALUES (\'' . $Attributes['Title'] . '\',\'' . $Attributes['FileLocation'] . '\',\'' . $Attributes['MediaType'] .
-                        '\',\'' . $Attributes['Format'] . '\',\'' . $Attributes['DateUploaded'] . '\',\'' . $Attributes['Price'] .
-                        '\',\'' . $Attributes['Categories_Category_ID'] . '\',\'' . $Attributes['User_UserID'] . '\');');
-        return true;
+        $result = $this->connection->insert('Media',
+            [
+                'Title' => $Attributes['Title'],
+                'FileLocation' => $Attributes['FileLocation'],
+                'ThumbnailLocation' => $Attributes['ThumbnailLocation'],
+                'MediaType' => $Attributes['MediaType'],
+                'Format' => $Attributes['Format'],
+                'DateUploaded' => $Attributes['DateUploaded'],
+                'Price' => $Attributes['Price'],
+                'Categories_Category_ID' => $Attributes['Categories_Category_ID'],
+                'User_UserID' => $Attributes['User_UserID']
+            ]);
+        if ($result->errorInfo()[0] = 0000) {
+            return true;
+        } else {
+            return false;
+        }
     }
     function InsertCategory($Category)
     {
@@ -111,27 +151,46 @@ class QueryDB
             ->execute('SELECT * FROM Categories WHERE Category = \'' . $Category . '\';' )
             ->fetchAll('assoc');
         if(empty($Categories)) {
-            $result = $this->connection
-                ->execute('INSERT INTO Categories (Category)
-                        VALUES (\'' . $Category . '\');');
-            return true;
+            $result = $this->connection->insert('Categories',
+                [
+                    'Category' => $Category
+                ]
+            );
+            if ($result->errorInfo()[0] = 0000) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        return false;
     }
     function InsertMessages($Attributes)
     {
-        $result = $this->connection
-            ->execute('INSERT INTO Messages (User1,User2,Message,Date)
-                        VALUES (\'' . $Attributes['User1'] . '\',\'' . $Attributes['User2'] . '\',\'' . $Attributes['Message'] .
-                        '\',\'' . $Attributes['Date'] . '\');');
-        return true;
+        $result = $this->connection->insert('Messages',
+            [
+                'User1' => $Attributes['User1'],
+                'User2' => $Attributes['User2'],
+                'Message' => $Attributes['Message'],
+                'Date' => $Attributes['Date']
+            ]);
+        if ($result->errorInfo()[0] = 0000) {
+            return true;
+        } else {
+            return false;
+        }
     }
     function InsertTransactions($Attributes)
     {
-        $result = $this->connection
-            ->execute('INSERT INTO Transactions (OrderDate,SoldBy,PurchasedBy)
-                        VALUES (\'' . $Attributes['OrderDate'] . '\',\'' . $Attributes['Soldby'] . '\',\'' . $Attributes['PurchaseBy'] .
-                        '\');');
-        return true;
+
+        $result = $this->connection->insert('Transactions',
+            [
+                'OrderDate' => $Attributes['OrderDate'],
+                'SoldBy' => $Attributes['SoldBy'],
+                'PurchasedBy' => $Attributes['PurchasedBy'],
+            ]);
+        if ($result->errorInfo()[0] = 0000) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
