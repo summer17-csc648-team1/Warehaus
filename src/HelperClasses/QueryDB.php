@@ -69,11 +69,12 @@ class QueryDB
         $results = $this->connection
             ->execute('SELECT * FROM Media M
                        JOIN Categories C ON C.CategoryID = M.Categories_Category_ID
-                       WHERE Category = ' . '\''. $category . '\';')
+                       WHERE Category LIKE ' . '\'%'. $category . '%\';')
             ->fetchAll('assoc');
 
         foreach ($results as $row)
         {
+            $row["User_UserID"] = $this->GetUsernameByID($row["User_UserID"]);
             array_push($ResultArray, $row);
         }
         $JSONResponse = json_encode($ResultArray);
@@ -95,6 +96,27 @@ class QueryDB
         $JSONResponse = json_encode($ResultArray);
 
         return $JSONResponse;
+    }
+    function GetIDByUsername($name)
+    {
+        $results = $this->connection
+            ->execute('SELECT * FROM User
+                       WHERE Username = \'' . $name . '\';')
+            ->fetchAll('assoc');
+
+        $JSONResponse = json_encode($results[0]);
+
+        return $JSONResponse;
+
+    }
+    function GetUsernameByID($ID)
+    {
+        $results = $this->connection
+            ->execute('SELECT * FROM User
+                        WHERE UserID = \'' . $ID . '\';' )
+            ->fetchAll('assoc');
+
+        return $results[0]["Username"];
     }
     function GetCategories()
     {
