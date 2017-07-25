@@ -66,4 +66,16 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+    
+     public function message() 
+    {
+        $query = new QueryDB();
+        $result = $query->InsertMessages($_POST('$attributes'));
+        if ($this->request->is('ajax')) 
+        {
+            $this->autoRender =false;
+            
+            
+        }
+    }
 }
