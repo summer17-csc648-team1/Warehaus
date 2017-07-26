@@ -19,10 +19,6 @@ use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
 use Cake\Network\Exception\NotFoundException;
 $this->layout = false;
-if (!Configure::read('debug')):
-    throw new NotFoundException('Please replace src/Template/Pages/home.ctp with your own version.');
-endif;
-$cakeDescription = 'CakePHP: the rapid development PHP framework';
 ?>
 
 <!DOCTYPE html>
@@ -75,6 +71,9 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
            color: white;
            background-color: red;
        }
+       .RPass{
+         padding-right: 0px;
+       }
        </style>
 
 
@@ -83,14 +82,12 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
  <body>
  <ul>
 
-         <li><a class="logo" href="home.ctp">WAREHAUS</a></li>
-
-
-         <li><a  class="active" href="register.ctp">REGISTER</a></li>
-         <li><a href="login.ctp">LOGIN</a></li>
-         <li><a href="upload.ctp">UPLOAD</a></li>
-         <li><a href="contact.ctp">CONTACT</a></li>
-         <li><a href="about.ctp">ABOUT US</a></li>
+         <li><a class="logo" href="/pages/home">WAREHAUS</a></li>
+         <li><a  class="active" href="/pages/register">REGISTER</a></li>
+         <li><a href="/pages/login">LOGIN</a></li>
+         <li><a href="/pages/upload">UPLOAD</a></li>
+         <li><a href="/pages/contact">CONTACT</a></li>
+         <li><a href="/pages/about">ABOUT US</a></li>
 
  </ul>
 
@@ -121,14 +118,21 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 <h1>Register:</h1>
                  <div>
 
-                     <form action='register.ctp' method='post'>
-                             <label>Username:</label><input type="text" name="username" /><br>
-                             <label>Password:</label><input type="password" name="password" /><br>
-                             <label>Re-enter Password:</label><input type="password" name="password" /><br>
-                             <br>
-                         <label></label><input type='submit' value='Register' />
-                         </div>
-                     </form>
+                   <form action='' method='post'>
+<p>Username*<br /><input type='text' name='username' value='<?php if(isset($error)){ echo $_POST['username']; } ?>'></p>
+<p>Email<br /><input type='text' name='email' value='<?php if(isset($error)){ echo $_POST['email']; } ?>'></p>
+<p>Password*<br /><input type='password' name='password' value=''></p>
+<p>Re-Enter Password*<br /><input type='password' name='passwordConfirm' value=''></p>
+<form action="#" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms Of Services'); return false; }">
+
+<input type="checkbox" name="checkbox" value="check" id="agree" /> I have read and agree to the Terms and Conditions and Privacy Policy
+
+
+</form>
+<p><input type='submit' name='submit' value='Register'></p>
+
+</form>
+
      <br><br>
        <p class="pull-right"><a href="http://www.bootply.com">Template from Bootply</a> &nbsp; ©Copyright 2013 ACME<sup>TM</sup> Brand.</p>
      <br><br>
