@@ -125,7 +125,7 @@ $this->layout = false;
 <p>Re-Enter Password*<br /><input type='password' name='passwordConfirm' value=''></p>
 <form action="#" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms Of Services'); return false; }">
 
-<input type="checkbox" name="checkbox" value="check" id="agree" /> I have read and agree to the Terms and Conditions and Privacy Policy
+<input type="checkbox" name="checkbox" value="check" id="agree" /> I have read and agree to the Terms Of Services
 
 
 </form>
