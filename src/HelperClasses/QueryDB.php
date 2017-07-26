@@ -193,4 +193,19 @@ class QueryDB
             return false;
         }
     }
+    function InsertUser($Attributes)
+    {
+        $result = $this->connection->insert('User',
+            [
+                'Username' => $Attributes['Username'],
+                'Password' => $Attributes['Password'],
+                'Role' => $Attributes['Role'],
+
+            ]);
+        if ($result->errorInfo()[0] = 0000) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
